@@ -21,3 +21,16 @@ body {
     display: inline-block;
     margin: 2.5%;
 }
+
+.category-button {
+    display: inline-block;
+    padding: 0.5em;
+    margin: 0.5em;
+    border-bottom: 1px solid gray;
+    width: 100%;
+}
+
+.category-button:hover {
+    cursor: pointer;
+    color: gray;
+}
