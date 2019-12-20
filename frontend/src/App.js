@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import {BrowserRouter, Route} from 'react-router-dom';
 import Header from "./components/Header";
 import MainPage from "./components/MainPage";
-import Category from "./components/Category";
+import Scenarios from "./components/Scenarios";
+import ScenarioPage from "./components/ScenarioPage";
+import EmptyPage from "./components/EmptyPage";
 
 class App extends Component {
     state = {
@@ -35,7 +37,11 @@ class App extends Component {
                     <Header categories={this.state.categories}/>
                     <div className="main-content container bg-light">
                         <Route exact path='/' component={MainPage}/>
-                        <Route path={'/scenarios'} component={Category}/>
+                        <Route exact path={'/scenarios'} component={Scenarios}/>
+                        <Route path={'/scenarios/:scenario_id'} component={ScenarioPage}/>
+                        <Route path={'/photos'} component={EmptyPage}/>
+                        <Route path={'/contacts'} component={EmptyPage}/>
+                        <Route path={'/rewards'} component={EmptyPage}/>
                     </div>
                 </BrowserRouter>
             </div>

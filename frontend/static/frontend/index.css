@@ -7,3 +7,17 @@ body {
     min-height: 100%;
     padding: 3em;
 }
+
+.scenarios-container {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+   min-height: 100%;
+   width: 100%;
+}
+
+.scenario-card {
+    width: 45%;
+    display: inline-block;
+    margin: 2.5%;
+}
