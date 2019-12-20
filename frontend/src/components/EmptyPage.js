@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
 class EmptyPage extends Component {
+    componentDidMount() {
+        document.title = "Пустая страница"
+    }
     render() {
         return (
             <div>

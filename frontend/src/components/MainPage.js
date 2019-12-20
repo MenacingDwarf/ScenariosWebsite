@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 
 class MainPage extends Component {
+    componentDidMount() {
+        document.title = "Главная"
+    }
     render() {
         return (
             <div>

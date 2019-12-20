@@ -41,6 +41,7 @@ class Scenarios extends Component {
 
     componentDidMount() {
         this.getScenarios();
+        document.title = "Сценарии"
     }
 
     render() {
