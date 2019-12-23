@@ -40,6 +40,7 @@ class Scenarios extends Component {
 
         xhr.send();
     }
+
     selectCategoryHandler = (e) => {
         let category = e.target.innerHTML;
         this.setState({selected_category: category});
@@ -54,20 +55,28 @@ class Scenarios extends Component {
 
     render() {
         let scenarios_list = this.state.scenarios.length !== 0 ? this.state.scenarios.map(scenario => {
-            return <div className="card scenario-card" key={scenario.id}>
-                <img src={scenario.image} className="card-img-top" alt="..."/>
-                <div className="card-body">
-                    <h5 className="card-title">{scenario.title}</h5>
-                    <p className="card-text">{scenario.description}</p>
-                </div>
-                <div className="card-footer">
-                    <Link to={"/scenarios/"+scenario.id.toString()} className="card-button btn btn-info stretched-link">Подробнее</Link>
+            return <div className="col-4">
+                <div className="card my-2" key={scenario.id}>
+                    <img src={scenario.image} className="card-img-top" alt="..."/>
+                    <div className="card-body">
+                         <Link to={"/scenarios/" + scenario.id.toString()}
+                              className="non-a stretched-link"><h5 className="card-title">{scenario.title}</h5></Link>
+                        <p className="card-text">{scenario.description}</p>
+                    </div>
+                    <div className="card-footer">
+                        {scenario.categories.map((category, index) => {
+                            return <span className={"scenario-category"}>{index !== scenario.categories.length - 1 ? '\"' + category + '\", ' : '\"' + category + '\"'}</span>
+                        })}
+                    </div>
                 </div>
             </div>
+
         }) : <div><i>В данной категории пока что нет сценариев</i></div>;
         let categories_list = this.state.categories.map((category, index) => {
             return <div className={"col-4"} key={index}>
-                <div className={"category-button"} onClick={this.selectCategoryHandler}>{category.title}</div>
+                <div
+                    className={"category-button" + (category.title === this.state.selected_category ? " active-category-button" : "")}
+                    onClick={this.selectCategoryHandler}>{category.title}</div>
             </div>
         });
         let category_title = this.state.selected_category ?
@@ -79,7 +88,7 @@ class Scenarios extends Component {
                 <h2>Доступные категории</h2>
                 <div className="row mb-2">{categories_list}</div>
                 {category_title}
-                <div className={"scenarios-container"}>
+                <div className={"row"}>
                     {scenarios_list}
                 </div>
             </div>

@@ -12,7 +12,6 @@ body {
    display: flex;
    flex-wrap: wrap;
    flex-direction: row;
-   min-height: 100%;
    width: 100%;
 }
 
@@ -22,15 +21,36 @@ body {
     margin: 2.5%;
 }
 
+.scenario-category {
+    color: #333333;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
 .category-button {
     display: inline-block;
     padding: 0.5em;
     margin: 0.5em;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid gray;
     width: 100%;
 }
 
 .category-button:hover {
     cursor: pointer;
     color: gray;
+}
+
+.active-category-button {
+    background-color: #dff5ff;
+}
+
+.active-category-button:hover {
+    color: #3fb1b2;
+}
+
+.non-a {
+    color: inherit;
+}
+.non-a:hover {
+    color: inherit;
 }

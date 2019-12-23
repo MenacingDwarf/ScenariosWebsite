@@ -3,12 +3,16 @@ from .models import *
 
 
 class ScenarioShortSerializer(serializers.ModelSerializer):
+    categories = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Scenario
         fields = ("id", "title", "description", "image", "categories")
 
 
 class ScenarioFullSerializer(serializers.ModelSerializer):
+    categories = serializers.StringRelatedField(many=True)
+
     class Meta:
         model = Scenario
         fields = ("id", "title", "description", "demo", "image", "categories")
