@@ -42,9 +42,9 @@ class ScenariosView(APIView):
             return Response({"data": serializer.data})
 
         category = request.GET.get('category')
-        scenarios = Scenario.objects.all()
+        scenarios = Scenario.objects.filter(posted=True)
         if category is not None:
-            scenarios = Scenario.objects.filter(categories__title=category)
+            scenarios = Scenario.objects.filter(categories__title=category, posted=True)
 
         serializer = ScenarioShortSerializer(scenarios, many=True)
         return Response({"data": serializer.data})
