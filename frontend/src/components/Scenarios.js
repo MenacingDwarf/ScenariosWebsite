@@ -91,7 +91,7 @@ class Scenarios extends Component {
                 категория: {this.state.selected_category ? this.state.selected_category : "Все сценарии"}</h3>
         </div>;
 
-        let content = this.state.categories === null ? loading : <div>
+        let content = this.state.categories === null ? loading : <div className={"col-12"}>
             <h2>Доступные категории</h2>
             <div className="row mb-2">
                 <div className={"col-4"}>
@@ -108,7 +108,7 @@ class Scenarios extends Component {
             </div>
         </div>;
         return (
-            <div>{content}</div>
+            <div className={"row"}>{content}</div>
         );
     }
 }

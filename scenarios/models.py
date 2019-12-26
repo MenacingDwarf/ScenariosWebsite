@@ -33,6 +33,7 @@ class Scenario(models.Model):
     max_duration_minutes = models.IntegerField(default=0)
     actors_number = models.IntegerField(default=0)
     target_audience = models.CharField(max_length=100, default="")
+    price = models.IntegerField(default=0)
     photos = models.ManyToManyField(Photo, related_name="scenarios", blank=True)
 
     def __str__(self):

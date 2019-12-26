@@ -14,7 +14,7 @@ class ScenarioShortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenario
         fields = ("id", "creation_date", "title", "description", "image", "categories", "min_duration_minutes",
-                  "max_duration_minutes", "actors_number", "target_audience")
+                  "max_duration_minutes", "actors_number", "target_audience", "price")
 
 
 class ScenarioFullSerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class ScenarioFullSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenario
         fields = ("id", "creation_date", "title", "description", "demo", "image", "categories", "min_duration_minutes",
-                  "max_duration_minutes", "actors_number", "target_audience", "photos")
+                  "max_duration_minutes", "actors_number", "target_audience", "photos", "price")
 
 
 class CategoryShortSerializer(serializers.ModelSerializer):
