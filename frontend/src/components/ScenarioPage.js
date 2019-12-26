@@ -34,9 +34,18 @@ class ScenarioPage extends Component {
                 </div>
             </div>
             <ul className="row list-group list-group-horizontal mb-2">
-                <li className="col-4 list-group-item text-center">{scenario.min_duration_minutes}-{scenario.max_duration_minutes} минут</li>
-                <li className="col-4 list-group-item text-center">{scenario.actors_number} актёров</li>
-                <li className="col-4 list-group-item text-center">Целевая аудитория: {scenario.target_audience}</li>
+                <li className="col-4 list-group-item text-center">
+                    <i className="far fa-clock " style={{fontSize: "1.5em"}}/><tr/>
+                    {scenario.min_duration_minutes}-{scenario.max_duration_minutes} минут
+                </li>
+                <li className="col-4 list-group-item text-center">
+                    <i className="fas fa-users" style={{fontSize: "1.5em"}}/><tr/>
+                    {scenario.actors_number} актёров
+                </li>
+                <li className="col-4 list-group-item text-center">
+                    <i className="fas fa-bullseye" style={{fontSize: "1.5em"}}/><tr/>
+                    Целевая аудитория: {scenario.target_audience}
+                </li>
             </ul>
             <div className="row">
                 <div className="alert alert-info" role="alert">

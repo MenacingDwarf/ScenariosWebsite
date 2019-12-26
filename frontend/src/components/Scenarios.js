@@ -69,11 +69,8 @@ class Scenarios extends Component {
                                 </Link>
                                 <p className="card-text">{scenario.description}</p>
                             </div>
-                            <div className="card-footer">
-                                {scenario.categories.map((category, index) => {
-                                    return <span
-                                        className={"scenario-category"}>{index !== scenario.categories.length - 1 ? '\"' + category + '\", ' : '\"' + category + '\"'}</span>
-                                })}
+                            <div className="card-footer text-center">
+                                <b>{scenario.price} руб.</b>
                             </div>
                         </div>
                     </div>
