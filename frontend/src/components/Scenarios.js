@@ -60,7 +60,7 @@ class Scenarios extends Component {
         let scenarios_list = this.state.scenarios === null ?
             loading : (
                 this.state.scenarios.length !== 0 ? this.state.scenarios.map(scenario => {
-                    return <div className="col-4">
+                    return <div className="col-lg-4 col-6">
                         <div className="card my-2" key={scenario.id}>
                             <img src={scenario.image} className="card-img-top" alt="..."/>
                             <div className="card-body">
@@ -89,21 +89,35 @@ class Scenarios extends Component {
         </div>;
 
         let content = this.state.categories === null ? loading : <div className={"col-12"}>
-            <h2>Доступные категории</h2>
-            <div className="row mb-2">
-                <div className={"col-4"}>
-                    <div
-                        className={"category-button" + (this.state.selected_category === null ? " active-category-button" : "")}
-                        onClick={this.selectCategoryHandler}>Все сценарии
+                <h2>Доступные категории</h2>
+                <div className="row mb-2">
+                    <div className={"col-4"}>
+                        <div
+                            className={"category-button" + (this.state.selected_category === null ? " active-category-button" : "")}
+                            onClick={this.selectCategoryHandler}>Все сценарии
+                        </div>
+                    </div>
+                    {categories_list}
+                </div>
+                <div className="row mb-2">
+                    <div className="col-12">
+                        <button type="button" className="btn btn-info mb-2" data-toggle="collapse"
+                                data-target="#filter-panel">
+                            <i className="fas fa-cog"/> Раширенные настройки
+                        </button>
+                        <form id="filter-panel" className="collapse"> </form>
                     </div>
                 </div>
-                {categories_list}
+                <div className="row">
+                    <div className="col-12">
+                        {category_title}
+                        <div className={"row"}>
+                            {scenarios_list}
+                        </div>
+                    </div>
+                </div>
             </div>
-            {category_title}
-            <div className={"row"}>
-                {scenarios_list}
-            </div>
-        </div>;
+        ;
         return (
             <div className={"row"}>{content}</div>
         );

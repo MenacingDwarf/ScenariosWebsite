@@ -22,15 +22,18 @@ class ScenarioPage extends Component {
 
     render() {
         let scenario = this.state.scenario;
+        let categories = scenario ? scenario.categories.map(category => {
+            return <span className="badge badge-info p-1 ml-2">{category}</span>}) : null;
         let content = scenario ? <div className={"col-12"}>
-            <div className="row mb-2">
+            <div className="row mb-3">
                 <div className="col-6">
                     <img src={scenario.image} alt="image" className={"rounded w-100"}/>
                 </div>
                 <div className="col-6">
                     <h1>{scenario.title}</h1>
                     <p>{scenario.description}</p>
-                    <h2>Цена: {scenario.price} руб.</h2>
+                    <div className={"mb-3"}><h2>Цена: {scenario.price} руб.</h2></div>
+                    <div>Категории:{categories}</div>
                 </div>
             </div>
             <ul className="row list-group list-group-horizontal mb-2">
@@ -48,6 +51,16 @@ class ScenarioPage extends Component {
                 </li>
             </ul>
             <div className="row">
+                <h2 className={"display-inline mr-3 mb-3"}>Демо-фрагмент</h2>
+                <button type="button" className="btn btn-outline-info mt-1 mb-3" data-toggle="collapse"
+                        data-target="#demo" onClick={(e) => this.setState({demo_open: !this.state.demo_open})}>
+                    {this.state.demo_open ? "Скрыть" : "Раскрыть"}
+                </button>
+                <br/>
+                <hr/>
+                <p className="collapse" id="demo" style={{whiteSpace: "pre-wrap"}}>{scenario.demo}</p>
+            </div>
+            <div className="row">
                 <div className="alert alert-info" role="alert">
                     <i>Дорогие друзья! Те, кого заинтересовал данный сценарий, могут получить его полную версию, с
                         авторскими минусами песен и презентациями, если напишут мне на электронный адрес:
@@ -58,16 +71,6 @@ class ScenarioPage extends Component {
                         праздничному концерту.
                         С уважением автор. А Гурков.</i>
                 </div>
-            </div>
-            <div className="row">
-                <h2 className={"display-inline mr-3 mb-3"}>Демо-фрагмент</h2>
-                <button type="button" className="btn btn-info mt-1 mb-3" data-toggle="collapse"
-                        data-target="#demo" onClick={(e) => this.setState({demo_open: !this.state.demo_open})}>
-                    {this.state.demo_open ? "Скрыть" : "Раскрыть"}
-                </button>
-                <br/>
-                <hr/>
-                <p className="collapse" id="demo" style={{whiteSpace: "pre-wrap"}}>{scenario.demo}</p>
             </div>
         </div> : <div className="spinner-border text-info mx-auto mt-3" role="status">
             <span className="sr-only">Loading...</span>
