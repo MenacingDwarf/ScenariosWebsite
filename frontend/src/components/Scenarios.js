@@ -60,7 +60,7 @@ class Scenarios extends Component {
         let scenarios_list = this.state.scenarios === null ?
             loading : (
                 this.state.scenarios.length !== 0 ? this.state.scenarios.map(scenario => {
-                    return <div className="col-lg-4 col-6">
+                    return <div className="col-12 col-lg-6 col-xl-4">
                         <div className="card my-2" key={scenario.id}>
                             <img src={scenario.image} className="card-img-top" alt="..."/>
                             <div className="card-body">
@@ -77,7 +77,7 @@ class Scenarios extends Component {
 
                 }) : <div><i>В данной категории пока что нет сценариев</i></div>);
         let categories_list = this.state.categories === null ? null : this.state.categories.map((category, index) => {
-            return <div className={"col-4"} key={index}>
+            return <div className={"col-6 col-lg-4 col-xl-3"} key={index}>
                 <div
                     className={"category-button" + (category.title === this.state.selected_category ? " active-category-button" : "")}
                     onClick={this.selectCategoryHandler}>{category.title}</div>
@@ -91,7 +91,7 @@ class Scenarios extends Component {
         let content = this.state.categories === null ? loading : <div className={"col-12"}>
                 <h2>Доступные категории</h2>
                 <div className="row mb-2">
-                    <div className={"col-4"}>
+                    <div className={"col-6 col-lg-4 col-xl-3"}>
                         <div
                             className={"category-button" + (this.state.selected_category === null ? " active-category-button" : "")}
                             onClick={this.selectCategoryHandler}>Все сценарии
@@ -105,7 +105,7 @@ class Scenarios extends Component {
                                 data-target="#filter-panel">
                             <i className="fas fa-cog"/> Раширенные настройки
                         </button>
-                        <form id="filter-panel" className="collapse"> </form>
+                        <form id="filter-panel" className="collapse"></form>
                     </div>
                 </div>
                 <div className="row">
