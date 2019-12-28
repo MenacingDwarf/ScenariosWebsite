@@ -3,9 +3,11 @@ from .models import *
 
 
 class PhotoSerializer(serializers.ModelSerializer):
+    scenario = serializers.StringRelatedField()
+
     class Meta:
         model = Photo
-        fields = ("id", "creation_date", "title", "link")
+        fields = ("id", "creation_date", "title", "image", "scenario")
 
 
 class ScenarioShortSerializer(serializers.ModelSerializer):
@@ -19,7 +21,7 @@ class ScenarioShortSerializer(serializers.ModelSerializer):
 
 class ScenarioFullSerializer(serializers.ModelSerializer):
     categories = serializers.StringRelatedField(many=True)
-    photos = PhotoSerializer(many=True)
+    photos = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Scenario

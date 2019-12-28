@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 from .models import *
+from .forms import *
 from .serializers import *
 
 from rest_framework.views import APIView
@@ -12,6 +14,22 @@ def hello(request):
     scenarios = Scenario.objects.all()
     print(len(scenarios))
     return render(request, "scenarios/index.html")
+
+
+def hotel_image_view(request):
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+    else:
+        form = PhotoForm()
+    return render(request, 'scenarios/photos.html', {'form': form})
+
+
+def success(request):
+    return HttpResponse('successfully uploaded')
 
 
 class CategoryView(APIView):
@@ -38,6 +56,7 @@ class ScenariosView(APIView):
         scenario_id = request.GET.get('scenario_id')
         if scenario_id is not None:
             scenario = Scenario.objects.get(id=scenario_id)
+            print(scenario.photos)
             serializer = ScenarioFullSerializer(scenario)
             return Response({"data": serializer.data})
 

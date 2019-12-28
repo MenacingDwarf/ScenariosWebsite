@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(Scenario)
 admin.site.register(Category)
+admin.site.register(Photo)

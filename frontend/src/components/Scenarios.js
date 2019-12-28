@@ -105,7 +105,7 @@ class Scenarios extends Component {
                                 data-target="#filter-panel">
                             <i className="fas fa-cog"/> Раширенные настройки
                         </button>
-                        <form id="filter-panel" className="collapse"></form>
+                        <form id="filter-panel" className="collapse">Ждите обновление в ближайшее время!</form>
                     </div>
                 </div>
                 <div className="row">

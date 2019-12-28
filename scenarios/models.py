@@ -2,16 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-class Photo(models.Model):
-    creation_date = models.DateTimeField(default=timezone.now)
-    posted = models.BooleanField(default=False)
-    title = models.CharField(max_length=100)
-    link = models.CharField(max_length=150)
-
-    def __str__(self):
-        return self.title
-
-
 class Category(models.Model):
     creation_date = models.DateTimeField(default=timezone.now)
     title = models.CharField(max_length=50)
@@ -27,14 +17,24 @@ class Scenario(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     demo = models.TextField()
-    image = models.CharField(max_length=150)
+    image = models.ImageField(upload_to='images/')
     categories = models.ManyToManyField(Category, related_name="scenarios", blank=True)
     min_duration_minutes = models.IntegerField(default=0)
     max_duration_minutes = models.IntegerField(default=0)
     actors_number = models.IntegerField(default=0)
     target_audience = models.CharField(max_length=100, default="")
     price = models.IntegerField(default=0)
-    photos = models.ManyToManyField(Photo, related_name="scenarios", blank=True)
 
     def __str__(self):
         return self.title
+
+
+class Photo(models.Model):
+    creation_date = models.DateTimeField(default=timezone.now)
+    posted = models.BooleanField(default=False)
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')
+    scenario = models.ForeignKey(Scenario, related_name="photos", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.image.url
