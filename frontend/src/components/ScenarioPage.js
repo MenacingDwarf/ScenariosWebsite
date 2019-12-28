@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import Photo from "./Photo";
 
 class ScenarioPage extends Component {
     state = {
@@ -30,24 +31,8 @@ class ScenarioPage extends Component {
                     <h2>Фотографии</h2>
                     <div className="row">
                         {scenario.photos.map((photo, index) => {
-                            return <div className="col-6 col-lg-4 mb-2" key={index}>
-                                <a className={"img-a"} data-toggle="modal" data-target={"#photoModal"+index.toString()}>
-                                    <img className={"w-100"} src={photo} alt="photo"/>
-                                </a>
-                                <div className="modal fade" id={"photoModal"+index.toString()} tabIndex="-1" role="dialog"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                        <div className="modal-content">
-                                            <div className="modal-body">
-                                                <button type="button" className="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                <img className={"w-100"} src={photo} alt="photo"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            return <div className="col-6 col-lg-4 col-xl-3 mb-2" key={index}>
+                                <Photo photo={photo} index={index}/>
                             </div>
                         })}
                     </div>

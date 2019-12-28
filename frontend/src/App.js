@@ -7,6 +7,7 @@ import ScenarioPage from "./components/ScenarioPage";
 import EmptyPage from "./components/EmptyPage";
 import Contacts from "./components/Contacts";
 import Rewards from "./components/Rewards";
+import PhotoGallery from "./components/PhotoGallery";
 
 class App extends Component {
     state = {
@@ -41,7 +42,7 @@ class App extends Component {
                         <Route exact path='/' component={MainPage}/>
                         <Route exact path={'/scenarios'} component={Scenarios}/>
                         <Route path={'/scenarios/:scenario_id'} component={ScenarioPage}/>
-                        <Route path={'/photos'} component={EmptyPage}/>
+                        <Route path={'/photos'} component={PhotoGallery}/>
                         <Route path={'/contacts'} component={Contacts}/>
                         <Route path={'/rewards'} component={Rewards}/>
                     </div>

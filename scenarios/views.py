@@ -70,3 +70,13 @@ class ScenariosView(APIView):
 
         serializer = ScenarioShortSerializer(scenarios[(page-1)*on_page:page*on_page], many=True)
         return Response({"data": serializer.data, "pages_num": (len(scenarios)-1)//on_page+1})
+
+
+class PhotoView(APIView):
+    permission_classes = [permissions.AllowAny, ]
+    authentication_classes = (authentication.TokenAuthentication,)
+
+    def get(self, request):
+        photos = Photo.objects.all()
+        serializer = PhotoSerializer(photos, many=True)
+        return Response({"data": serializer.data})
