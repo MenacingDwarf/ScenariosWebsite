@@ -53,6 +53,8 @@ class ScenariosView(APIView):
     authentication_classes = (authentication.TokenAuthentication,)
 
     def get(self, request):
+        on_page = 12
+
         scenario_id = request.GET.get('scenario_id')
         if scenario_id is not None:
             scenario = Scenario.objects.get(id=scenario_id)
@@ -61,9 +63,10 @@ class ScenariosView(APIView):
             return Response({"data": serializer.data})
 
         category = request.GET.get('category')
-        scenarios = Scenario.objects.filter(posted=True)
+        page = int(request.GET.get('page'))
+        scenarios = Scenario.objects.filter(posted=True).order_by('creation_date')
         if category is not None:
-            scenarios = Scenario.objects.filter(categories__title=category, posted=True)
+            scenarios = Scenario.objects.filter(categories__title=category, posted=True).order_by('creation_date')
 
-        serializer = ScenarioShortSerializer(scenarios, many=True)
-        return Response({"data": serializer.data})
+        serializer = ScenarioShortSerializer(scenarios[(page-1)*on_page:page*on_page], many=True)
+        return Response({"data": serializer.data, "pages_num": (len(scenarios)-1)//on_page+1})

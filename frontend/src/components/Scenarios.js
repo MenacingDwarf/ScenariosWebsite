@@ -6,6 +6,8 @@ class Scenarios extends Component {
         selected_category: null,
         categories: null,
         scenarios: null,
+        page: 1,
+        pages_num: 1
     };
 
     getCategories() {
@@ -23,18 +25,19 @@ class Scenarios extends Component {
         xhr.send();
     }
 
-    getScenarios(category = null) {
+    getScenarios(category = null, page = null) {
         let sel_category = category === null ? this.state.selected_category : category;
+        let sel_page = page === null ? this.state.page.toString() : page.toString();
         let comp = this;
         let xhr = new XMLHttpRequest();
-        let cat_param = category !== null ? "?category=" + sel_category : "";
+        let cat_param = category !== null ? "?category=" + sel_category + "&page=" + sel_page : "?page=" + sel_page;
         xhr.open("GET", "/api/scenarios/" + cat_param, true);
         xhr.onreadystatechange = function () {
             if (this.readyState !== 4) return;
             var answer = JSON.parse(decodeURIComponent(this.responseText));
-            console.log(answer);
             comp.setState({
-                scenarios: answer.data
+                scenarios: answer.data,
+                pages_num: answer.pages_num
             });
         };
 
@@ -43,8 +46,15 @@ class Scenarios extends Component {
 
     selectCategoryHandler = (e) => {
         let category = e.target.innerHTML === "Все сценарии" ? null : e.target.innerHTML;
-        this.setState({selected_category: category, scenarios: null});
-        this.getScenarios(category);
+        this.setState({selected_category: category, scenarios: null, page: 1});
+        this.getScenarios(category, null);
+    };
+
+    selectPageHandler = (e) => {
+        let page = parseInt(e.target.innerHTML);
+        console.log(page);
+        this.setState({scenarios: null, page: page});
+        this.getScenarios(null, page);
     };
 
     componentDidMount() {
@@ -60,7 +70,7 @@ class Scenarios extends Component {
         let scenarios_list = this.state.scenarios === null ?
             loading : (
                 this.state.scenarios.length !== 0 ? this.state.scenarios.map(scenario => {
-                    return <div className="col-12 col-lg-6 col-xl-4">
+                    return <div className="col-12 col-lg-6 col-xl-4" key={scenario.id}>
                         <div className="card my-2" key={scenario.id}>
                             <img src={scenario.image} className="card-img-top" alt="..."/>
                             <div className="card-body">
@@ -87,7 +97,17 @@ class Scenarios extends Component {
             <h3>Выбранная
                 категория: {this.state.selected_category ? this.state.selected_category : "Все сценарии"}</h3>
         </div>;
-
+        let pages_buttons = [];
+        for (let i = 1; i < this.state.pages_num + 1; i++) {
+            pages_buttons[i] = i === this.state.page ? <li className="page-item active" aria-current="page">
+                    <a className="page-link" href="#">{i} <span className="sr-only">(current)</span></a>
+                </li> : <li className="page-item"><a className={"page-link"} onClick={this.selectPageHandler} href="#">{i}</a></li>
+        }
+        let pages_bar = this.state.scenarios ? (this.state.pages_num > 1 ? <nav aria-label="...">
+                            <ul className="pagination">
+                                {pages_buttons}
+                            </ul>
+                        </nav> : null) : null;
         let content = this.state.categories === null ? loading : <div className={"col-12"}>
                 <h2>Доступные категории</h2>
                 <div className="row mb-2">
@@ -99,28 +119,32 @@ class Scenarios extends Component {
                     </div>
                     {categories_list}
                 </div>
-                <div className="row mb-2">
-                    <div className="col-12">
-                        <button type="button" className="btn btn-info mb-2" data-toggle="collapse"
-                                data-target="#filter-panel">
-                            <i className="fas fa-cog"/> Раширенные настройки
-                        </button>
-                        <form id="filter-panel" className="collapse">Ждите обновление в ближайшее время!</form>
-                    </div>
-                </div>
+                {/*<div className="row mb-2">*/}
+                    {/*<div className="col-12">*/}
+                        {/*<button type="button" className="btn btn-info mb-2" data-toggle="collapse"*/}
+                                {/*data-target="#filter-panel">*/}
+                            {/*<i className="fas fa-cog"/> Раширенные настройки*/}
+                        {/*</button>*/}
+                        {/*<form id="filter-panel" className="collapse">Ждите обновление в ближайшее время!</form>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
                 <div className="row">
                     <div className="col-12">
                         {category_title}
                         <div className={"row"}>
                             {scenarios_list}
                         </div>
+                        {pages_bar}
                     </div>
                 </div>
             </div>
         ;
+
         return (
+
             <div className={"row"}>{content}</div>
-        );
+        )
+            ;
     }
 }
 

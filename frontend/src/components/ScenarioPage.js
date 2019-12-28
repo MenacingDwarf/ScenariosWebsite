@@ -13,7 +13,6 @@ class ScenarioPage extends Component {
             .then(response => response.json())
             .then(result => {
                 this.setState({scenario: result.data});
-                console.log(result.data);
                 document.title = this.state.scenario.title;
             })
     }
@@ -79,18 +78,15 @@ class ScenarioPage extends Component {
                 <ul className="row list-group list-group-horizontal mb-2">
                     <li className="col-6 col-lg-4 list-group-item text-center">
                         <i className="far fa-clock " style={{fontSize: "1.5em"}}/>
-                        <tr/>
-                        {scenario.min_duration_minutes}-{scenario.max_duration_minutes} минут
+                        <div>{scenario.min_duration_minutes}-{scenario.max_duration_minutes} минут</div>
                     </li>
                     <li className="col-6 col-lg-4 list-group-item text-center">
                         <i className="fas fa-users" style={{fontSize: "1.5em"}}/>
-                        <tr/>
-                        {scenario.actors_number} актёров
+                        <div>{scenario.actors_number} актёров</div>
                     </li>
                     <li className="col-12 col-lg-4 list-group-item text-center">
                         <i className="fas fa-bullseye" style={{fontSize: "1.5em"}}/>
-                        <tr/>
-                        Для {scenario.target_audience}
+                        <div>Для {scenario.target_audience}</div>
                     </li>
                 </ul>
             </div>
