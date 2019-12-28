@@ -78,5 +78,5 @@ class PhotoView(APIView):
 
     def get(self, request):
         photos = Photo.objects.all()
-        serializer = PhotoSerializer(photos, many=True)
+        serializer = PhotoFullSerializer(photos, many=True)
         return Response({"data": serializer.data})

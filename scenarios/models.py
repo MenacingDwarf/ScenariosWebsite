@@ -32,7 +32,7 @@ class Scenario(models.Model):
 class Photo(models.Model):
     creation_date = models.DateTimeField(default=timezone.now)
     posted = models.BooleanField(default=False)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, null=True, blank=True, default=None)
     image = models.ImageField(upload_to='images/')
     scenario = models.ForeignKey(Scenario, related_name="photos", on_delete=models.CASCADE)
 

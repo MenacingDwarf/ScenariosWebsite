@@ -2,12 +2,18 @@ from rest_framework import serializers
 from .models import *
 
 
-class PhotoSerializer(serializers.ModelSerializer):
+class PhotoFullSerializer(serializers.ModelSerializer):
     scenario = serializers.StringRelatedField()
 
     class Meta:
         model = Photo
-        fields = ("id", "creation_date", "title", "image", "scenario")
+        fields = ("title", "image", "scenario")
+
+
+class PhotoShortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = ("title", "image")
 
 
 class ScenarioShortSerializer(serializers.ModelSerializer):
@@ -21,7 +27,7 @@ class ScenarioShortSerializer(serializers.ModelSerializer):
 
 class ScenarioFullSerializer(serializers.ModelSerializer):
     categories = serializers.StringRelatedField(many=True)
-    photos = serializers.StringRelatedField(many=True)
+    photos = PhotoShortSerializer(many=True)
 
     class Meta:
         model = Scenario

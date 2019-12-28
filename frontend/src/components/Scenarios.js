@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import Loader from "./Loader";
 
 class Scenarios extends Component {
     state = {
@@ -64,11 +65,8 @@ class Scenarios extends Component {
     }
 
     render() {
-        let loading = <div className="spinner-border text-info mx-auto mt-3" role="status">
-            <span className="sr-only">Loading...</span>
-        </div>;
         let scenarios_list = this.state.scenarios === null ?
-            loading : (
+            <Loader/> : (
                 this.state.scenarios.length !== 0 ? this.state.scenarios.map(scenario => {
                     return <div className="col-12 col-lg-6 col-xl-4" key={scenario.id}>
                         <div className="card my-2" key={scenario.id}>
@@ -108,7 +106,7 @@ class Scenarios extends Component {
                                 {pages_buttons}
                             </ul>
                         </nav> : null) : null;
-        let content = this.state.categories === null ? loading : <div className={"col-12"}>
+        let content = this.state.categories === null ? <Loader/> : <div className={"col-12"}>
                 <h2>Доступные категории</h2>
                 <div className="row mb-2">
                     <div className={"col-6 col-lg-4 col-xl-3"}>

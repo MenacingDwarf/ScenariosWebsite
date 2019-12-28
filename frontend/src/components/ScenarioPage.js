@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import Photo from "./Photo";
+import Loader from "./Loader";
 
 class ScenarioPage extends Component {
     state = {
@@ -105,9 +106,7 @@ class ScenarioPage extends Component {
             <div className="col-12">
                 {photos}
             </div>
-        </div> : <div className="spinner-border text-info mx-auto mt-3" role="status">
-            <span className="sr-only">Loading...</span>
-        </div>;
+        </div> : <Loader/>;
         return (
             <div className="row">{content}</div>
         );
