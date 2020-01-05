@@ -57,10 +57,15 @@ class ScenariosView(APIView):
 
         scenario_id = request.GET.get('scenario_id')
         if scenario_id is not None:
-            scenario = Scenario.objects.get(id=scenario_id)
-            print(scenario.photos)
-            serializer = ScenarioFullSerializer(scenario)
-            return Response({"data": serializer.data})
+            try:
+                scenario = Scenario.objects.get(id=scenario_id)
+                print(scenario.photos)
+                serializer = ScenarioFullSerializer(scenario)
+                return Response({"data": serializer.data})
+            except Exception as e:
+                with open("logs.txt", "w") as f:
+                    f.write(e)
+                return redirect('')
 
         category = request.GET.get('category')
         page = int(request.GET.get('page'))
