@@ -64,7 +64,7 @@ class ScenariosView(APIView):
                 return Response({"data": serializer.data})
             except Exception as e:
                 with open("logs.txt", "w") as f:
-                    f.write(e)
+                    f.write(str(e.args))
                 return redirect('')
 
         category = request.GET.get('category')
