@@ -61,6 +61,7 @@ class Scenarios extends Component {
     componentDidMount() {
         this.getCategories();
         this.getScenarios();
+        this.props.setActiveLink(2);
         document.title = "Сценарии"
     }
 

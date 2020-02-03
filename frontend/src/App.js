@@ -10,8 +10,20 @@ import Rewards from "./components/Rewards";
 import PhotoGallery from "./components/PhotoGallery";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.setActiveLink = this.setActiveLink.bind(this);
+    }
     state = {
         categories: [],
+        links: [
+            {id: 1, title: "Главная", to: "/"},
+            {id: 2, title: "Сценарии", to: "/scenarios"},
+            {id: 3, title: "Фотогалерея", to: "/photos"},
+            {id: 4, title: "Достижения", to: "/rewards"},
+            {id: 5, title: "Контакты", to: "/contacts"}
+        ],
+        active_link: 1
     };
 
     getCategories() {
@@ -29,6 +41,10 @@ class App extends Component {
         xhr.send();
     }
 
+    setActiveLink(link_id) {
+        this.setState({active_link: link_id})
+    }
+
     componentDidMount() {
         this.getCategories();
     }
@@ -37,14 +53,14 @@ class App extends Component {
         return (
             <div>
                 <BrowserRouter>
-                    <Header categories={this.state.categories}/>
+                    <Header categories={this.state.categories} links={this.state.links} active_link={this.state.active_link}/>
                     <div className="main-content container bg-light">
-                        <Route exact path='/' component={MainPage}/>
-                        <Route exact path={'/scenarios'} component={Scenarios}/>
-                        <Route path={'/scenarios/:scenario_id'} component={ScenarioPage}/>
-                        <Route path={'/photos'} component={PhotoGallery}/>
-                        <Route path={'/contacts'} component={Contacts}/>
-                        <Route path={'/rewards'} component={Rewards}/>
+                        <Route exact path='/' render={(props) => <MainPage {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route exact path={'/scenarios'} render={(props) => <Scenarios {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/scenarios/:scenario_id'} render={(props) => <ScenarioPage {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/photos'} render={(props) => <PhotoGallery {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/contacts'} render={(props) => <Contacts {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/rewards'} render={(props) => <Rewards {...props} setActiveLink={this.setActiveLink}/>}/>
                     </div>
                 </BrowserRouter>
             </div>

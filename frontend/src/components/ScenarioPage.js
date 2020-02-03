@@ -21,6 +21,7 @@ class ScenarioPage extends Component {
 
     componentDidMount() {
         this.getScenario();
+        this.props.setActiveLink(2);
     }
 
     render() {
@@ -72,7 +73,7 @@ class ScenarioPage extends Component {
                     </li>
                     <li className="col-12 col-lg-4 list-group-item text-center">
                         <i className="fas fa-bullseye" style={{fontSize: "1.5em"}}/>
-                        <div>Для {scenario.target_audience}</div>
+                        <div>{scenario.target_audience}</div>
                     </li>
                 </ul>
             </div>

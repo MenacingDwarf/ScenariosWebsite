@@ -5,6 +5,17 @@ class Header extends Component {
     render() {
         let current = <span className="sr-only">(current)</span>;
         let path = window.location.pathname.toString();
+        let links = this.props.links.map(link => {
+            return link.id === this.props.active_link ? (
+                <li className="nav-item active" key={link.id}>
+                    <Link className={"nav-link active"} to={link.to}>{link.title}</Link>
+                </li>
+            ) : (
+                <li className="nav-item" key={link.id}>
+                    <Link className={"nav-link"} to={link.to}>{link.title}</Link>
+                </li>
+            )
+        });
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-info p-4">
                 <Link className="navbar-brand" to="/">
@@ -16,27 +27,13 @@ class Header extends Component {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul className="navbar-nav mr-auto">
-                        <li className="nav-item active">
-                            <Link className={"nav-link active"} to={"/"}>Главная</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className={"nav-link"} to={"/scenarios"}>Сценарии</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={"/photos"}>Фотогалерея</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={"/rewards"}>Достижения</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to={"/contacts"}>Контакты</Link>
-                        </li>
+                        {links}
                     </ul>
-                    <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Поик"
-                               aria-label="Search"/>
-                        <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>
-                    </form>
+                    {/*<form className="form-inline my-2 my-lg-0">*/}
+                    {/*    <input className="form-control mr-sm-2" type="search" placeholder="Поик"*/}
+                    {/*           aria-label="Search"/>*/}
+                    {/*    <button className="btn btn-outline-light my-2 my-sm-0" type="submit">Поиск</button>*/}
+                    {/*</form>*/}
                 </div>
             </nav>
         );

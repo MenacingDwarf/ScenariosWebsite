@@ -17,6 +17,7 @@ class PhotoGallery extends Component {
 
     componentDidMount() {
         document.title = "Фотогалерея";
+        this.props.setActiveLink(3);
         this.getPhotos();
     }
 

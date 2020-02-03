@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class MainPage extends Component {
     componentDidMount() {
+        this.props.setActiveLink(1);
         document.title = "Главная"
     }
     render() {

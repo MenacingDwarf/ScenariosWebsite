@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class Contacts extends Component {
     componentDidMount() {
+        this.props.setActiveLink(5);
         document.title = "Контакты"
     }
     render() {

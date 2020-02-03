@@ -63,9 +63,9 @@ class ScenariosView(APIView):
 
         category = request.GET.get('category')
         page = int(request.GET.get('page'))
-        scenarios = Scenario.objects.filter(posted=True).order_by('creation_date')
+        scenarios = Scenario.objects.filter(posted=True).order_by('-creation_date')
         if category is not None:
-            scenarios = Scenario.objects.filter(categories__title=category, posted=True).order_by('creation_date')
+            scenarios = Scenario.objects.filter(categories__title=category, posted=True).order_by('-creation_date')
 
         serializer = ScenarioShortSerializer(scenarios[(page-1)*on_page:page*on_page], many=True)
         return Response({"data": serializer.data, "pages_num": (len(scenarios)-1)//on_page+1})

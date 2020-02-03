@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class Rewards extends Component {
     componentDidMount() {
+        this.props.setActiveLink(4);
         document.title = "Достижения"
     }
     render() {
