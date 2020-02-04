@@ -8,6 +8,7 @@ import EmptyPage from "./components/EmptyPage";
 import Contacts from "./components/Contacts";
 import Rewards from "./components/Rewards";
 import PhotoGallery from "./components/PhotoGallery";
+import {CircleArrow as ScrollUpButton} from "react-scroll-up-button";
 
 class App extends Component {
     constructor(props) {
@@ -54,7 +55,7 @@ class App extends Component {
             <div>
                 <BrowserRouter>
                     <Header categories={this.state.categories} links={this.state.links} active_link={this.state.active_link}/>
-                    <div className="main-content container bg-light">
+                    <div className="main-content bg-light">
                         <Route exact path='/' render={(props) => <MainPage {...props} setActiveLink={this.setActiveLink}/>}/>
                         <Route exact path={'/scenarios'} render={(props) => <Scenarios {...props} setActiveLink={this.setActiveLink}/>}/>
                         <Route path={'/scenarios/:scenario_id'} render={(props) => <ScenarioPage {...props} setActiveLink={this.setActiveLink}/>}/>
@@ -63,6 +64,7 @@ class App extends Component {
                         <Route path={'/rewards'} render={(props) => <Rewards {...props} setActiveLink={this.setActiveLink}/>}/>
                     </div>
                 </BrowserRouter>
+                <ScrollUpButton />
             </div>
         );
     }
