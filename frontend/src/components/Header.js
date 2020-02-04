@@ -19,7 +19,7 @@ class Header extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-info p-4">
                 <Link className="navbar-brand" to="/">
-                    Лестница в небо
+                    <img src={"media/images/logo.png"} alt={"logo"} width={"150px"}/>
                 </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
                         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
