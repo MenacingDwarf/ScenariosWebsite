@@ -22,16 +22,21 @@ class PhotoGallery extends Component {
     }
 
     render() {
-        return (
+        let content =
             <div className={"row"}>
-                {this.state.photos ? <div className="row">
+                {this.state.photos ? (this.state.photos.length === 0 ? <div>Пока что фотографий нет!</div> :
+                    <div className="row">
                         {this.state.photos.map((photo, index) => {
                             return <div className="col-6 col-lg-4 col-xl-3 mb-2" key={index}>
                                 <Photo photo={photo} index={index}/>
                             </div>
                         })}
-                    </div> : <Loader/>}
+                    </div>) : <Loader/>}
 
+            </div>;
+        return (
+            <div>
+                {content}
             </div>
         );
     }

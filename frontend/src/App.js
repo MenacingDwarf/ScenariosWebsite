@@ -16,7 +16,6 @@ class App extends Component {
         this.setActiveLink = this.setActiveLink.bind(this);
     }
     state = {
-        categories: [],
         links: [
             {id: 1, title: "Главная", to: "/"},
             {id: 2, title: "Сценарии", to: "/scenarios"},
@@ -27,34 +26,15 @@ class App extends Component {
         active_link: 1
     };
 
-    getCategories() {
-        let comp = this;
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", '/api/categories', true);
-        xhr.onreadystatechange = function () {
-            if (this.readyState !== 4) return;
-            var answer = JSON.parse(decodeURIComponent(this.responseText));
-            comp.setState({
-                categories: answer.data
-            });
-        };
-
-        xhr.send();
-    }
-
     setActiveLink(link_id) {
         this.setState({active_link: link_id})
-    }
-
-    componentDidMount() {
-        this.getCategories();
     }
 
     render() {
         return (
             <div>
                 <BrowserRouter>
-                    <Header categories={this.state.categories} links={this.state.links} active_link={this.state.active_link}/>
+                    <Header links={this.state.links} active_link={this.state.active_link}/>
                     <div className="main-content bg-light">
                         <Route exact path='/' render={(props) => <MainPage {...props} setActiveLink={this.setActiveLink}/>}/>
                         <Route exact path={'/scenarios'} render={(props) => <Scenarios {...props} setActiveLink={this.setActiveLink}/>}/>

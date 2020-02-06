@@ -54,9 +54,9 @@ class ScenarioPage extends Component {
                     <img src={scenario.image} alt="image" className={"rounded w-100"}/>
                 </div>
                 <div className="col-12 col-lg-6">
-                    <h1>{scenario.title}</h1>
+                    <h3>{scenario.title}</h3>
                     <p>{scenario.description}</p>
-                    <div className={"mb-3"}><h2>Цена: <span className={"text-info"}>{scenario.price} руб.</span></h2></div>
+                    <div className={"mb-3"}><h4>Цена: <span className={"text-info"}>{scenario.price} руб.</span></h4></div>
                     <div>Категории:{categories}</div>
                 </div>
             </div>
@@ -80,7 +80,7 @@ class ScenarioPage extends Component {
             <hr/>
             <div className="col-12">
                 <div className="row">
-                    <h2 className={"display-inline mr-3 mb-3 align-middle"}>Демо-фрагмент</h2>
+                    <h4 className={"display-inline mr-3 mb-3 align-middle"}>Демо-фрагмент</h4>
                     <button type="button" className="btn btn-outline-info mt-1 mb-3" data-toggle="collapse"
                             data-target="#demo"
                             onClick={(e) => this.setState({demo_open: !this.state.demo_open})}>
