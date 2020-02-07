@@ -59,8 +59,12 @@ class Scenarios extends Component {
     };
 
     componentDidMount() {
+        this.state.selected_category = this.props.selectedCategory;
+        this.props.selectCategory(null);
+
         this.getCategories();
-        this.getScenarios();
+        this.getScenarios(this.state.selected_category);
+
         this.props.setActiveLink(2);
         document.title = "Сценарии"
     }
@@ -84,7 +88,7 @@ class Scenarios extends Component {
                         </div>
                     </div>
 
-                }) : <div><i>В данной категории пока что нет сценариев</i></div>);
+                }) : <div className="col-12"><i>В данной категории пока что нет сценариев</i></div>);
         let categories_list = this.state.categories === null ? null : this.state.categories.map((category, index) => {
             return <div className={"col-6 col-lg-4 col-xl-3"} key={index}>
                 <div

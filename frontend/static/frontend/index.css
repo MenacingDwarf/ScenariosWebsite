@@ -74,6 +74,13 @@ body {
     margin: 4px 10px 2px 0px;
 }
 
+.demo-part {
+    white-space: pre-wrap;
+    border: solid #888888 1px;
+    padding: 1em;
+    border-radius: 5px;
+}
+
 @media screen and (max-width: 990px) {
     body {
         font-size: 36px;
@@ -99,5 +106,8 @@ body {
     }
     h6 {
         font-size: 44px;
+    }
+    .main-content {
+        width: 90%;
     }
 }

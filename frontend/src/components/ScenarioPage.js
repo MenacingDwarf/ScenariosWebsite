@@ -86,7 +86,7 @@ class ScenarioPage extends Component {
                             onClick={(e) => this.setState({demo_open: !this.state.demo_open})}>
                         {this.state.demo_open ? "Скрыть" : "Раскрыть"}
                     </button>
-                    <p className="collapse" id="demo" style={{whiteSpace: "pre-wrap"}}>{scenario.demo}</p>
+                    <div className="collapse demo-part" id="demo" style={{whiteSpace: "pre-wrap"}}>{scenario.demo}</div>
                 </div>
             </div>
             <hr/>

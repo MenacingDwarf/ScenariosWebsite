@@ -21,6 +21,11 @@ class MainPage extends Component {
         xhr.send();
     }
 
+    selectCategoryHandler = (e)=> {
+        this.props.selectCategory(e.target.innerHTML);
+        this.props.history.push("/scenarios");
+    };
+
     componentDidMount() {
         this.props.setActiveLink(1);
         document.title = "Главная";
@@ -28,9 +33,17 @@ class MainPage extends Component {
     }
 
     render() {
+        let categories_list = this.state.categories === null ? null : this.state.categories.map((category, index) => {
+            return <div className={"col-6 col-lg-4 col-xl-3"} key={index}>
+                <div
+                    className={"category-button"}
+                    onClick={this.selectCategoryHandler}>{category.title}</div>
+            </div>
+        });
         let content = this.state.categories === null ? <Loader/> :
             <div>
                 <h1>Добро пожаловать на мой сайт!</h1>
+                <hr/>
                 <div className="row">
                     <div className="col-12 col-lg-6 col-xl-4">
                         <img className={"w-100"} src={"/media/images/logo.png"} alt={"logo"}/>
@@ -54,6 +67,14 @@ class MainPage extends Component {
                 </div>
                 <div className="row">
                     <div className="col-12">
+                        <h3>На сайте вы можете найти сценарии следущих категорий:</h3>
+                    </div>
+                    {categories_list}
+
+                </div>
+                <div className="row">
+                    <div className="col-12">
+                        <hr/>
                         <h3>Немного обо мне</h3>
                         <p>
                             <img

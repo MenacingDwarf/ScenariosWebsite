@@ -14,7 +14,9 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.setActiveLink = this.setActiveLink.bind(this);
+        this.selectCategory = this.selectCategory.bind(this);
     }
+
     state = {
         links: [
             {id: 1, title: "Главная", to: "/"},
@@ -23,11 +25,16 @@ class App extends Component {
             {id: 4, title: "Достижения", to: "/rewards"},
             {id: 5, title: "Контакты", to: "/contacts"}
         ],
-        active_link: 1
+        active_link: 1,
+        selected_category: null
     };
 
     setActiveLink(link_id) {
         this.setState({active_link: link_id})
+    }
+
+    selectCategory(category_name) {
+        this.setState({selected_category: category_name})
     }
 
     render() {
@@ -36,15 +43,23 @@ class App extends Component {
                 <BrowserRouter>
                     <Header links={this.state.links} active_link={this.state.active_link}/>
                     <div className="main-content bg-light">
-                        <Route exact path='/' render={(props) => <MainPage {...props} setActiveLink={this.setActiveLink}/>}/>
-                        <Route exact path={'/scenarios'} render={(props) => <Scenarios {...props} setActiveLink={this.setActiveLink}/>}/>
-                        <Route path={'/scenarios/:scenario_id'} render={(props) => <ScenarioPage {...props} setActiveLink={this.setActiveLink}/>}/>
-                        <Route path={'/photos'} render={(props) => <PhotoGallery {...props} setActiveLink={this.setActiveLink}/>}/>
-                        <Route path={'/contacts'} render={(props) => <Contacts {...props} setActiveLink={this.setActiveLink}/>}/>
-                        <Route path={'/rewards'} render={(props) => <Rewards {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route exact path='/' render={(props) => <MainPage {...props} setActiveLink={this.setActiveLink}
+                                                                           selectCategory={this.selectCategory}/>}/>
+                        <Route exact path={'/scenarios'}
+                               render={(props) => <Scenarios {...props} setActiveLink={this.setActiveLink}
+                                                             selectedCategory={this.state.selected_category}
+                                                             selectCategory={this.selectCategory}/>}/>
+                        <Route path={'/scenarios/:scenario_id'}
+                               render={(props) => <ScenarioPage {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/photos'}
+                               render={(props) => <PhotoGallery {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/contacts'}
+                               render={(props) => <Contacts {...props} setActiveLink={this.setActiveLink}/>}/>
+                        <Route path={'/rewards'}
+                               render={(props) => <Rewards {...props} setActiveLink={this.setActiveLink}/>}/>
                     </div>
                 </BrowserRouter>
-                <ScrollUpButton />
+                <ScrollUpButton/>
             </div>
         );
     }
