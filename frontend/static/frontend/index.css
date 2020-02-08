@@ -86,6 +86,12 @@ body {
         font-size: 36px;
         line-height: 44px;
     }
+    .form-control {
+        font-size: 36px;
+    }
+    .col-form-label {
+        font-size: 36px;
+    }
     .btn {
         font-size: 36px;
     }

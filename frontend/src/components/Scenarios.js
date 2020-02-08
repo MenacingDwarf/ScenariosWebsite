@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import Loader from "./Loader";
+import ExtendedSearch from "./ExtendedSearch";
 
 class Scenarios extends Component {
     state = {
@@ -36,6 +37,7 @@ class Scenarios extends Component {
         xhr.onreadystatechange = function () {
             if (this.readyState !== 4) return;
             var answer = JSON.parse(decodeURIComponent(this.responseText));
+            console.log(answer);
             comp.setState({
                 scenarios: answer.data,
                 pages_num: answer.pages_num
@@ -70,25 +72,29 @@ class Scenarios extends Component {
     }
 
     render() {
-        let scenarios_list = this.state.scenarios === null ?
-            <Loader/> : (
-                this.state.scenarios.length !== 0 ? this.state.scenarios.map(scenario => {
-                    return <div className="col-12 col-lg-6 col-xl-4" key={scenario.id}>
-                        <div className="card my-2" key={scenario.id}>
-                            <img src={scenario.image} className="card-img-top" alt="..."/>
-                            <div className="card-body">
-                                <Link to={"/scenarios/" + scenario.id.toString()}
-                                      className="non-a stretched-link"><h5 className="card-title">{scenario.title}</h5>
-                                </Link>
-                                <p className="card-text">{scenario.description}</p>
-                            </div>
-                            <div className="card-footer text-center">
-                                <b>{scenario.price} руб.</b>
+        let scenarios_list = this.state.scenarios === null ? <div className={"row"}><Loader/></div> : (
+            this.state.scenarios.length !== 0 ? (
+                <div className={"row"}>
+                    <div className="col-12"><ExtendedSearch/></div>
+                    {this.state.scenarios.map(scenario => {
+                        return <div className="col-12 col-lg-6 col-xl-4" key={scenario.id}>
+                            <div className="card my-2" key={scenario.id}>
+                                <img src={scenario.image} className="card-img-top" alt="..."/>
+                                <div className="card-body">
+                                    <Link to={"/scenarios/" + scenario.id.toString()}
+                                          className="non-a stretched-link"><h5
+                                        className="card-title">{scenario.title}</h5>
+                                    </Link>
+                                    <p className="card-text">{scenario.description}</p>
+                                </div>
+                                <div className="card-footer text-center">
+                                    <b>{scenario.price} руб.</b>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                }) : <div className="col-12"><i>В данной категории пока что нет сценариев</i></div>);
+                    })}
+                </div>) : <div className="col-12"><i>В данной категории пока что нет сценариев</i></div>);
         let categories_list = this.state.categories === null ? null : this.state.categories.map((category, index) => {
             return <div className={"col-6 col-lg-4 col-xl-3"} key={index}>
                 <div
@@ -104,13 +110,15 @@ class Scenarios extends Component {
         for (let i = 1; i < this.state.pages_num + 1; i++) {
             pages_buttons[i] = i === this.state.page ? <li className="page-item active" aria-current="page">
                     <a className="page-link" href="#">{i} <span className="sr-only">(current)</span></a>
-                </li> : <li className="page-item"><a className={"page-link"} onClick={this.selectPageHandler} href="#">{i}</a></li>
+                </li> :
+                <li className="page-item"><a className={"page-link"} onClick={this.selectPageHandler} href="#">{i}</a>
+                </li>
         }
         let pages_bar = this.state.scenarios ? (this.state.pages_num > 1 ? <nav aria-label="...">
-                            <ul className="pagination">
-                                {pages_buttons}
-                            </ul>
-                        </nav> : null) : null;
+            <ul className="pagination">
+                {pages_buttons}
+            </ul>
+        </nav> : null) : null;
         let content = this.state.categories === null ? <Loader/> : <div className={"col-12"}>
                 <h2>Доступные категории</h2>
                 <div className="row mb-2">
@@ -122,21 +130,10 @@ class Scenarios extends Component {
                     </div>
                     {categories_list}
                 </div>
-                {/*<div className="row mb-2">*/}
-                    {/*<div className="col-12">*/}
-                        {/*<button type="button" className="btn btn-info mb-2" data-toggle="collapse"*/}
-                                {/*data-target="#filter-panel">*/}
-                            {/*<i className="fas fa-cog"/> Раширенные настройки*/}
-                        {/*</button>*/}
-                        {/*<form id="filter-panel" className="collapse">Ждите обновление в ближайшее время!</form>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
                 <div className="row">
                     <div className="col-12">
                         {category_title}
-                        <div className={"row"}>
-                            {scenarios_list}
-                        </div>
+                        {scenarios_list}
                         {pages_bar}
                     </div>
                 </div>
