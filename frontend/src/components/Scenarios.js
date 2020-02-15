@@ -75,7 +75,7 @@ class Scenarios extends Component {
         let scenarios_list = this.state.scenarios === null ? <div className={"row"}><Loader/></div> : (
             this.state.scenarios.length !== 0 ? (
                 <div className={"row"}>
-                    <div className="col-12"><ExtendedSearch/></div>
+                    {/*<div className="col-12"><ExtendedSearch/></div>*/}
                     {this.state.scenarios.map(scenario => {
                         return <div className="col-12 col-lg-6 col-xl-4" key={scenario.id}>
                             <div className="card my-2" key={scenario.id}>

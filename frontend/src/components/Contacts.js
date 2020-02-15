@@ -16,7 +16,6 @@ class Contacts extends Component {
                 <p>Объем работы и оплата по договоренности.</p>
                 <p>Моя страница в Контакте: <a href={"https://vk.com/id4152408"}>https://vk.com/id4152408</a></p>
                 <p>С уважением, Гурков Андрей Николаевич</p>
-                <ExtendedSearch/>
             </div>
         );
     }
