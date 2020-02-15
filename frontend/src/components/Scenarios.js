@@ -50,12 +50,11 @@ class Scenarios extends Component {
     selectCategoryHandler = (e) => {
         let category = e.target.innerHTML === "Все сценарии" ? null : e.target.innerHTML;
         this.setState({selected_category: category, scenarios: null, page: 1});
-        this.getScenarios(category, null);
+        this.getScenarios(category, 1);
     };
 
     selectPageHandler = (e) => {
         let page = parseInt(e.target.innerHTML);
-        console.log(page);
         this.setState({scenarios: null, page: page});
         this.getScenarios(null, page);
     };
